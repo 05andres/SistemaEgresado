@@ -44,7 +44,8 @@
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @else
-                            <li class="nav-item dropdown">
+                            <div class="top-right links">
+                            <li class="top-right links">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
@@ -56,9 +57,13 @@
                                     @endif
 
                                     @if (Auth::user()->isAdmin2())
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{ route('register.egre') }}">
                                             {{ __('Agregar Egresado') }}
                                         </a>
+
+                                            <a class="dropdown-item" href="{{ route('register.egre') }}">
+                                                {{ __('ver egresados') }}
+                                            </a>
                                     @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -73,6 +78,7 @@
                                     </form>
                                 </div>
                             </li>
+                            </div>
                         @endguest
                     </ul>
                 </div>

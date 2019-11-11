@@ -32,3 +32,11 @@ Route::middleware(['admin'])->group(function () {
 
     Route::post('regisad','RootController@AdminResgister')->name('registroad');
 });
+
+route::get('register',function(){
+    return view('admin.registeregresado');
+
+})->name('register.egre');
+
+Route::post('regisegre','AdminController@registeregresado')->name('registregre');
+
