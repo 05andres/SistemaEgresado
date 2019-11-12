@@ -1854,9 +1854,129 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      description: "",
+      //Esta variable, mediante v-model esta relacionada con el input del formulario
+      update: 0,
+
+      /*Esta variable contrarolará cuando es una nueva tarea o una modificación, si es 0 significará que no hemos seleccionado
+      ninguna tarea, pero si es diferente de 0 entonces tendrá el id de la tarea y no mostrará el boton guardar sino el modificar*/
+      arrayTasks: [],
+      //Este array contendrá las tareas de nuestra bd
+      name: ""
+    };
+  },
+  methods: {
+    getTasks: function getTasks() {
+      var me = this;
+      var url = '/posts'; //Ruta que hemos creado para que nos devuelva todas las tareas
+
+      axios.get(url).then(function (response) {
+        //creamos un array y guardamos el contenido que nos devuelve el response
+        me.arrayTasks = response.data;
+        console.log(response.data);
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    },
+    saveTasks: function saveTasks() {
+      var me = this;
+      var url = '/post'; //Ruta que hemos creado para enviar una tarea y guardarla
+
+      axios.post(url, {
+        //estas variables son las que enviaremos para que crear la tarea
+        'description': this.description
+      }).then(function (response) {
+        me.getTasks(); //llamamos al metodo getTask(); para que refresque nuestro array y muestro los nuevos datos
+
+        me.clearFields(); //Limpiamos los campos e inicializamos la variable update a 0
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    updateTasks: function updateTasks() {
+      /*Esta funcion, es igual que la anterior, solo que tambien envia la variable update que contiene el id de la
+      tarea que queremos modificar*/
+      var me = this;
+      axios.put('/tareas/actualizar', {
+        'id': this.update,
+        'description': this.description,
+        'content': this.content
+      }).then(function (response) {
+        me.getTasks(); //llamamos al metodo getTask(); para que refresque nuestro array y muestro los nuevos datos
+
+        me.clearFields(); //Limpiamos los campos e inicializamos la variable update a 0
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadFieldsUpdate: function loadFieldsUpdate(data) {
+      //Esta función rellena los campos y la variable update, con la tarea que queremos modificar
+      this.update = data.id;
+      var me = this;
+      var url = '/tareas/buscar?id=' + this.update;
+      axios.get(url).then(function (response) {
+        me.description = response.data.description;
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    },
+    deleteTask: function deleteTask(data) {
+      //Esta nos abrirá un alert de javascript y si aceptamos borrará la tarea que hemos elegido
+      var me = this;
+      var task_id = data.id;
+
+      if (confirm('¿Seguro que deseas borrar esta tarea?')) {
+        axios["delete"]('/tareas/borrar/' + task_id).then(function (response) {
+          me.getTasks();
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
+    clearFields: function clearFields() {
+      /*Limpia los campos e inicializa la variable update a 0*/
+      this.description = "";
+    }
+  },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.getTasks();
   }
 });
 
@@ -37168,28 +37288,145 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container container-task" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("h2", [_vm._v("Lista de tareas")]),
+        _vm._v(" "),
+        _c("table", { staticClass: "table text-center" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.arrayTasks, function(task) {
+              return _c("tr", { key: task.id }, [
+                _c("td", { domProps: { textContent: _vm._s(task["name"]) } }),
+                _vm._v(" "),
+                _c("td", {
+                  domProps: { textContent: _vm._s(task.description) }
+                }),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      on: {
+                        click: function($event) {
+                          return _vm.loadFieldsUpdate(task)
+                        }
+                      }
+                    },
+                    [_vm._v("Modificar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteTask(task)
+                        }
+                      }
+                    },
+                    [_vm._v("Borrar")]
+                  )
+                ])
+              ])
+            }),
+            0
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Descripción")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.description,
+                expression: "description"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.description = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "container-buttons" }, [
+            _vm.update == 0
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    on: {
+                      click: function($event) {
+                        return _vm.saveTasks()
+                      }
+                    }
+                  },
+                  [_vm._v("Añadir")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.update != 0
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-warning",
+                    on: {
+                      click: function($event) {
+                        return _vm.updateTasks()
+                      }
+                    }
+                  },
+                  [_vm._v("Actualizar")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.update != 0
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn",
+                    on: {
+                      click: function($event) {
+                        return _vm.clearFields()
+                      }
+                    }
+                  },
+                  [_vm._v("Atrás")]
+                )
+              : _vm._e()
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Descripción")])
       ])
     ])
   }

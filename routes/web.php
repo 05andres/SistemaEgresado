@@ -40,3 +40,8 @@ route::get('register',function(){
 
 Route::post('regisegre','AdminController@registeregresado')->name('registregre');
 
+
+Route::post('/post','PostsController@create');
+Route::get('/posts','PostsController@index');
+
+

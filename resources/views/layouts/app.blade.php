@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ asset("imagenes/egresado.ico") }}" />
+    <script src="https://kit.fontawesome.com/5e6d638aa4.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="app">
