@@ -24,18 +24,36 @@ class PostsController extends Controller
     public function index(){
         $cont=0;
         $datos = [];
-        $poster=Post::all();
+        $poster=Post::orderBy('created_at','DESC')->get();
+        $id = Auth::id();
+        $user = User::find($id);
+        $rol=$user->isAdmin2();
         foreach ($poster as $key => $dato) {
             $datos[$cont] = [
+                'id' =>$dato->id,
                 'description' =>$dato->descripcion,
                 'name'=> $dato->user->name,
+                'fecha'=>$dato->created_at
             ];
             $cont += 1;
         }
-            return response()->json($datos);
+            return response()->json([
+                'datos'=>$datos,
+                'rol'=>$rol
+            ]);
+        }
+
+
+        public function delete($id){
+        Post::destroy($id);
+
+        return response()->json($id);
+
         }
 
 
 
 
 }
+
+

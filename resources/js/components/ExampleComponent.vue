@@ -1,46 +1,36 @@
 <template>
     <div class="container container-task">
-        <div class="row">
-            <div class="col-md-6">
-                <h2>Lista de tareas</h2>
-                <table class="table text-center"><!--Creamos una tabla que mostrará todas las tareas-->
-                    <thead>
-                    <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Descripción</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="task in arrayTasks" :key="task.id"> <!--Recorremos el array y cargamos nuestra tabla-->
-                        <td v-text="task['name']"></td>
-                        <td v-text="task.description"></td>
-                        <td>
-                            <!--Botón modificar, que carga los datos del formulario con la tarea seleccionada-->
-                            <button class="btn" @click="loadFieldsUpdate(task)">Modificar</button>
-                            <!--Botón que borra la tarea que seleccionemos-->
-                            <button class="btn" @click="deleteTask(task)">Borrar</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+        <section  class="border-dashed border-2 border-blue-300 table p-8 mt-20 m-auto relative  ">
+            <div class="relative">
+            <textarea v-if="rol == true" v-model="description" type="textarea"
+                      class="text-center shadow appearance-none border border-red-500 rounded w-full h-auto py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                      placeholder="¿Que esta pasando?" maxlength="200"></textarea>
             </div>
-            <div class="col-md-6">
-                <div class="form-group"><!-- Formulario para la creación o modificación de nuestras tareas-->
+            <div class="text-center">
+                <button v-if="update == 0 && rol == true " @click="saveTasks()"
+                    class="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline "
+                    type="submit" style="width: 150px;">
+                    Publicar
+                </button>
+            </div>
+            <br>
+            <div  v-for="task in arrayTasks" :key="task.id"
+                class="border-2 border-black h-auto w-56 sm:h-auto sm:w-72 md:h-auto md:w-72 lg:h-auto lg:w-72 xl:h-auto xl:w-72 relative bg-blue-200 opacity-75">
 
-                    <label>Descripción</label>
-                    <input v-model="description" type="text" class="form-control">
-
-                <div class="container-buttons">
-                    <!-- Botón que añade los datos del formulario, solo se muestra si la variable update es igual a 0-->
-                    <button v-if="update == 0" @click="saveTasks()" class="btn btn-success">Añadir</button>
-                    <!-- Botón que modifica la tarea que anteriormente hemos seleccionado, solo se muestra si la variable update es diferente a 0-->
-                    <button v-if="update != 0" @click="updateTasks()" class="btn btn-warning">Actualizar</button>
-                    <!-- Botón que limpia el formulario y inicializa la variable a 0, solo se muestra si la variable update es diferente a 0-->
-                    <button v-if="update != 0" @click="clearFields()" class="btn">Atrás</button>
+                <div class=" h-auto w-8 sm:h-auto sm:w-8 md:h-auto md:w-24 lg:h-auto lg xl:h-auto xl:w-64 relative">
+                    <img :src="'imagenes/user.jpg'">
+                </div>
+                <div class="absolute sm:text-lg md:text-xl lg:text-2xl xl:text-2xl">
+                    <h1 v-text="task['name']"></h1>
+                </div>
+                <div class="text-xs text-right sm:text-lg md:text-xl lg:text-2xl xl:text-2xl relative mr-4">
+                    <button id="btn-abrir-popup"><i  v-text="task.description" class="fas fa-user-edit "></i></button>
+                    <button id="btn-abrir-popup1"><i class="fas fa-user-check "></i></button>
+                    <button id="btn-abrir-popupEliUser" @click="deleteTask(task)"><i class="fas fa-user-times"></i></button>
                 </div>
             </div>
-        </div>
-    </div>
+
+        </section>
 
     </div>
 </template>
@@ -54,7 +44,9 @@
                 update:0, /*Esta variable contrarolará cuando es una nueva tarea o una modificación, si es 0 significará que no hemos seleccionado
                          ninguna tarea, pero si es diferente de 0 entonces tendrá el id de la tarea y no mostrará el boton guardar sino el modificar*/
                 arrayTasks:[], //Este array contendrá las tareas de nuestra bd
-                name:""
+                name:"",
+                rol:false
+
             }
         },
         methods:{
@@ -63,7 +55,8 @@
                 let url = '/posts' //Ruta que hemos creado para que nos devuelva todas las tareas
                 axios.get(url).then(function (response) {
                     //creamos un array y guardamos el contenido que nos devuelve el response
-                    me.arrayTasks = response.data;
+                    me.arrayTasks = response.data['datos'];
+                    me.rol=response.data['rol'];
                     console.log(response.data);
                 })
                     .catch(function (error) {
@@ -115,10 +108,12 @@
             },
             deleteTask(data){//Esta nos abrirá un alert de javascript y si aceptamos borrará la tarea que hemos elegido
                 let me =this;
-                let task_id = data.id
-                if (confirm('¿Seguro que deseas borrar esta tarea?')) {
-                    axios.delete('/tareas/borrar/'+task_id
+                let id = data.id;
+                console.log(id);
+                if (confirm('¿Seguro que deseas borrar esta post?')) {
+                    axios.delete('/post/delete/'+id
                     ).then(function (response) {
+                        console.log(response);
                         me.getTasks();
                     })
                         .catch(function (error) {

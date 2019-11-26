@@ -44,4 +44,6 @@ Route::post('regisegre','AdminController@registeregresado')->name('registregre')
 Route::post('/post','PostsController@create');
 Route::get('/posts','PostsController@index');
 
+Route::delete('/post/delete/{id}', 'PostsController@delete');
+
 

@@ -21,12 +21,7 @@ html {
  */
 
 body {
-    margin: 0;
-    background: url(../imagenes/bck_egresado.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  margin: 0;
 }
 
 /**
@@ -11405,6 +11400,256 @@ video {
 .z-auto {
   z-index: auto;
 }
+
+nav li ul {
+  display: none;
+}
+
+nav li:hover > ul {
+  display: block;
+}
+
+.md\:w-68 {
+  width: 24rem;
+}
+
+.lg\:w-68 {
+  width: 36rem;
+}
+
+.xl\:w-68 {
+  width: 40rem;
+}
+
+/* popup's */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* ------------------------- */
+
+/* POPUP */
+
+/* ------------------------- */
+
+.overlay {
+  background: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: flex;
+  visibility: hidden;
+}
+
+.overlay.active {
+  visibility: visible;
+}
+
+.popup {
+  background: #F8F8F8;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  font-family: "Montserrat", sans-serif;
+  padding: 20px;
+  text-align: center;
+  width: 600px;
+  /*transition: .3s ease all;*/
+  -webkit-transform: scale(0.7);
+          transform: scale(0.7);
+  opacity: 0;
+}
+
+.popup .btn-cerrar-popup {
+  font-size: 16px;
+  line-height: 16px;
+  display: block;
+  text-align: right;
+  -webkit-transition: 0.3s ease all;
+  transition: 0.3s ease all;
+  color: #BBBBBB;
+}
+
+.sm\:w-72 {
+  width: 32rem;
+}
+
+.md\:w-72 {
+  width: 32rem;
+}
+
+.lg\:w-72 {
+  width: 44rem;
+}
+
+.xl\:w-72 {
+  width: 60rem;
+}
+
+.popup .btn-cerrar-popup:hover {
+  color: #000;
+}
+
+.popup h3 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  opacity: 0;
+}
+
+.popup h4 {
+  font-size: 26px;
+  font-weight: 300;
+  margin-bottom: 40px;
+  opacity: 0;
+}
+
+.popup form .contenedor-inputs {
+  opacity: 0;
+}
+
+.popup form .contenedor-inputs input {
+  width: 100%;
+  margin-bottom: 20px;
+  height: 52px;
+  font-size: 18px;
+  line-height: 52px;
+  text-align: center;
+  border: 1px solid #BBBBBB;
+}
+
+.btn-submit {
+  padding: 0 20px;
+  height: 40px;
+  line-height: 40px;
+  border: none;
+  color: #fff;
+  background: #5E7DE3;
+  border-radius: 3px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-transition: 0.3s ease all;
+  transition: 0.3s ease all;
+}
+
+.popup form .btn-submit:hover {
+  background: rgba(94, 125, 227, 0.9);
+}
+
+/* ------------------------- */
+
+/* ANIMACIONES */
+
+/* ------------------------- */
+
+.popup.active {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  opacity: 1;
+}
+
+.popup.active i {
+  -webkit-animation: entradaTitulo 0.8s ease 0.5s forwards;
+          animation: entradaTitulo 0.8s ease 0.5s forwards;
+}
+
+.popup.active h4 {
+  -webkit-animation: entradaSubtitulo 0.8s ease 0.5s forwards;
+          animation: entradaSubtitulo 0.8s ease 0.5s forwards;
+}
+
+.popup.active .contenedor-inputs {
+  -webkit-animation: entradaInputs 1s linear 1s forwards;
+          animation: entradaInputs 1s linear 1s forwards;
+}
+
+@-webkit-keyframes entradaTitulo {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-25px);
+            transform: translateY(-25px);
+  }
+
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes entradaTitulo {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-25px);
+            transform: translateY(-25px);
+  }
+
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes entradaSubtitulo {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(25px);
+            transform: translateY(25px);
+  }
+
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes entradaSubtitulo {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(25px);
+            transform: translateY(25px);
+  }
+
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes entradaInputs {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes entradaInputs {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* lista_egresados.html*/
 
 @media (min-width: 640px) {
   .sm\:sr-only {
