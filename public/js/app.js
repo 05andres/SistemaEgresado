@@ -1854,9 +1854,123 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      description: "",
+      //Esta variable, mediante v-model esta relacionada con el input del formulario
+      update: 0,
+
+      /*Esta variable contrarolará cuando es una nueva tarea o una modificación, si es 0 significará que no hemos seleccionado
+      ninguna tarea, pero si es diferente de 0 entonces tendrá el id de la tarea y no mostrará el boton guardar sino el modificar*/
+      arrayTasks: [],
+      //Este array contendrá las tareas de nuestra bd
+      name: "",
+      rol: false
+    };
+  },
+  methods: {
+    getTasks: function getTasks() {
+      var me = this;
+      var url = '/posts'; //Ruta que hemos creado para que nos devuelva todas las tareas
+
+      axios.get(url).then(function (response) {
+        //creamos un array y guardamos el contenido que nos devuelve el response
+        me.arrayTasks = response.data['datos'];
+        me.rol = response.data['rol'];
+        console.log(response.data);
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    },
+    saveTasks: function saveTasks() {
+      var me = this;
+      var url = '/post'; //Ruta que hemos creado para enviar una tarea y guardarla
+
+      axios.post(url, {
+        //estas variables son las que enviaremos para que crear la tarea
+        'description': this.description
+      }).then(function (response) {
+        me.getTasks(); //llamamos al metodo getTask(); para que refresque nuestro array y muestro los nuevos datos
+
+        me.clearFields(); //Limpiamos los campos e inicializamos la variable update a 0
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    updateTasks: function updateTasks() {
+      /*Esta funcion, es igual que la anterior, solo que tambien envia la variable update que contiene el id de la
+      tarea que queremos modificar*/
+      var me = this;
+      axios.put('/tareas/actualizar', {
+        'id': this.update,
+        'description': this.description,
+        'content': this.content
+      }).then(function (response) {
+        me.getTasks(); //llamamos al metodo getTask(); para que refresque nuestro array y muestro los nuevos datos
+
+        me.clearFields(); //Limpiamos los campos e inicializamos la variable update a 0
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadFieldsUpdate: function loadFieldsUpdate(data) {
+      //Esta función rellena los campos y la variable update, con la tarea que queremos modificar
+      this.update = data.id;
+      var me = this;
+      var url = '/tareas/buscar?id=' + this.update;
+      axios.get(url).then(function (response) {
+        me.description = response.data.description;
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    },
+    deleteTask: function deleteTask(data) {
+      //Esta nos abrirá un alert de javascript y si aceptamos borrará la tarea que hemos elegido
+      var me = this;
+      var id = data.id;
+      console.log(id);
+
+      if (confirm('¿Seguro que deseas borrar esta post?')) {
+        axios["delete"]('/post/delete/' + id).then(function (response) {
+          console.log(response);
+          me.getTasks();
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
+    clearFields: function clearFields() {
+      /*Limpia los campos e inicializa la variable update a 0*/
+      this.description = "";
+    }
+  },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.getTasks();
   }
 });
 
@@ -37168,29 +37282,139 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container container-task" }, [
+    _c(
+      "section",
+      {
+        staticClass:
+          "border-dashed border-2 border-blue-300 table p-8 mt-20 m-auto relative  "
+      },
+      [
+        _c("div", { staticClass: "relative" }, [
+          _vm.rol == true
+            ? _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.description,
+                    expression: "description"
+                  }
+                ],
+                staticClass:
+                  "text-center shadow appearance-none border border-red-500 rounded w-full h-auto py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline",
+                attrs: {
+                  type: "textarea",
+                  placeholder: "¿Que esta pasando?",
+                  maxlength: "200"
+                },
+                domProps: { value: _vm.description },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.description = $event.target.value
+                  }
+                }
+              })
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-center" }, [
+          _vm.update == 0 && _vm.rol == true
+            ? _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline ",
+                  staticStyle: { width: "150px" },
+                  attrs: { type: "submit" },
+                  on: {
+                    click: function($event) {
+                      return _vm.saveTasks()
+                    }
+                  }
+                },
+                [_vm._v("\n                Publicar\n            ")]
+              )
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _vm._l(_vm.arrayTasks, function(task) {
+          return _c(
+            "div",
+            {
+              key: task.id,
+              staticClass:
+                "border-2 border-black h-auto w-56 sm:h-auto sm:w-72 md:h-auto md:w-72 lg:h-auto lg:w-72 xl:h-auto xl:w-72 relative bg-blue-200 opacity-75"
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    " h-auto w-8 sm:h-auto sm:w-8 md:h-auto md:w-24 lg:h-auto lg xl:h-auto xl:w-64 relative"
+                },
+                [_c("img", { attrs: { src: "imagenes/user.jpg" } })]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "absolute sm:text-lg md:text-xl lg:text-2xl xl:text-2xl"
+                },
+                [_c("h1", { domProps: { textContent: _vm._s(task["name"]) } })]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "text-xs text-right sm:text-lg md:text-xl lg:text-2xl xl:text-2xl relative mr-4"
+                },
+                [
+                  _c("button", { attrs: { id: "btn-abrir-popup" } }, [
+                    _c("i", {
+                      staticClass: "fas fa-user-edit ",
+                      domProps: { textContent: _vm._s(task.description) }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0, true),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      attrs: { id: "btn-abrir-popupEliUser" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteTask(task)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-user-times" })]
+                  )
+                ]
+              )
+            ]
+          )
+        })
+      ],
+      2
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
-      ])
+    return _c("button", { attrs: { id: "btn-abrir-popup1" } }, [
+      _c("i", { staticClass: "fas fa-user-check " })
     ])
   }
 ]

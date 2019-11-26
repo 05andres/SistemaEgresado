@@ -17,6 +17,11 @@
                     You are logged in!
                 </div>
             </div>
+            <body>
+            <div id="app" class="content">
+                <Example-component></Example-component><!--Añadimos nuestro componente vuejs-->
+            </div>
+            </body>
         </div>
     </div>
 </div>

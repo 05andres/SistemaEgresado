@@ -17,72 +17,80 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ asset("imagenes/egresado.ico") }}" />
+    <script src="https://kit.fontawesome.com/5e6d638aa4.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="background: url(imagenes/bck_egresado.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;">
+
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'SISTEMA EGRESADO') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <nav class="text-white block relative" style="z-index: 100;">
+            <ul class="bg-black table w-full">
+                <!--primer nivel-->
+                <br>
+                &nbsp
+                <i class="fas fa-graduation-cap fa-3x"></i>
+                &nbsp
+                <span class="text-white font-bold text-3xl tracking-tighter ">Sistema Egresados</span>
+                <li class="float-right leading-foro relative mx-6 my-1 "><a href="{{ url('/') }}"><i class="fas fa-bars fa-2x"></i></a>
+                    <ul class="absolute" style="right: -50px; ">
+                        <!--Segundo nivel-->
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+                                @guest
+                                    <li class="bg-black" style="width: 200px;">&nbsp<button class="hover:bg-white" href="{{ route('logout') }}"><i
+                                                class="fas fa-users-cog"></i>&nbsp LOGIN</button>
+                                        <ul class="absolute" style="right: 100%; top: 0; width: 90%;">
+                                @else
+                                                <li class="bg-black" style="width: 200px;">&nbsp<button class="hover:bg-white" href="#"><i
+                                                            class="fas fa-users-cog"></i>&nbsp control egresados</button>
+                                                    <ul class="absolute" style="right: 100%; top: 0; width: 90%;">
+                                <!--Tercer nivel-->
+                                @if (Auth::user()->isAdmin2())
 
+                                <li class="bg-black">
+                                    <a class="hover:bg-white" href="{{ route('register.egre') }}">&nbsp<i class="fas fa-user-plus"></i>&nbsp
+                                        Agregar
+                                        egresado</a><br>
+                                    <a class="hover:bg-white">&nbsp<i class="fas fa-user-edit"></i>&nbsp
+                                        Modificar
+                                        egresado</a><br>
+                                    <a class="hover:bg-white">&nbsp<i class="fas fa-user-times"></i>&nbsp Eliminar
+                                        egresado</a><br>
+                                    <a class="hover:bg-white" href="#">&nbsp<i class="fas fa-user-check"></i>&nbsp
+                                        Visualizar egresado</a>
+                                </li>
+                                @endif
+                                @if (Auth::user()->isAdmin())
+                                    <li class="bg-black">
+                                        <a class="hover:bg-white" href="{{ route('admin.register') }}">&nbsp<i class="fas fa-user-plus"></i>&nbsp
+                                            Agregar
+                                            administrador</a><br>
+                                        <a class="hover:bg-white">&nbsp<i class="fas fa-user-edit"></i>&nbsp
+                                            Modificar
+                                            administrador</a><br>
+                                        <a class="hover:bg-white">&nbsp<i class="fas fa-user-times"></i>&nbsp Eliminar
+                                            egresado</a><br>
+                                        <a class="hover:bg-white" href="#">&nbsp<i class="fas fa-user-check"></i>&nbsp
+                                            Visualizar administrador</a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </li>
+                        <li class="bg-black"><a onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" class="hover:bg-white" href="{{ route('logout') }}">&nbsp<i
+                                    class="fas fa-sign-out-alt"></i>&nbsp Cerrar sesión</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
                     </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @else
-                            <div class="top-right links">
-                            <li class="top-right links">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    @if (Auth::user()->isAdmin())
-                                    <a class="dropdown-item" href="{{ route('admin.register') }}">
-                                        {{ __('Agregar administrador') }}
-                                    </a>
-                                    @endif
-
-                                    @if (Auth::user()->isAdmin2())
-                                        <a class="dropdown-item" href="{{ route('register.egre') }}">
-                                            {{ __('Agregar Egresado') }}
-                                        </a>
-
-                                            <a class="dropdown-item" href="{{ route('register.egre') }}">
-                                                {{ __('ver egresados') }}
-                                            </a>
-                                    @endif
-
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            </div>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
+                </li>
+                @endguest
+            </ul>
         </nav>
 
         <main class="py-4">
