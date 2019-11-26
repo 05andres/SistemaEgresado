@@ -18,3 +18,32 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+Route::middleware(['admin'])->group(function () {
+    Route::get('/dashboard-admin', function (){
+        return view('root.admin');
+    })->name('admin.dashboard'); // <--- este es el nombre que busca el controlador.
+
+    Route::get('register-admin',function (){
+        return view('root.registeradmin');
+    })->name('admin.register');;
+
+    Route::post('regisad','RootController@AdminResgister')->name('registroad');
+});
+
+route::get('register',function(){
+    return view('admin.registeregresado');
+
+})->name('register.egre');
+
+Route::post('regisegre','AdminController@registeregresado')->name('registregre');
+
+
+Route::post('/post','PostsController@create');
+Route::get('/posts','PostsController@index');
+
+Route::delete('/post/delete/{id}', 'PostsController@delete');
+
+
