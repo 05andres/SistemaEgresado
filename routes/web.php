@@ -49,4 +49,6 @@ Route::get('/posts','PostsController@index');
 
 Route::delete('/post/delete/{id}', 'PostsController@delete');
 
+Route::delete('/listauser/{id}','AdminController@deleteegresado')->name('borrar');
+
 

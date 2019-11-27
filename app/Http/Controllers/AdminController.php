@@ -12,7 +12,6 @@ class AdminController extends Controller
     {
 
         $input = $request->all();
-        dd($input);
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -36,5 +35,15 @@ class AdminController extends Controller
     public function listuser(){
         $userlist = User::where('id_role',3)->get();
         return view('auth.listusers')->with(['users'=> $userlist]);
+    }
+
+    public function deleteegresado($id)
+
+    {
+        User::destroy($id);
+        return response()->json([
+            'message' => 'Egresado Eliminado'
+        ]);
+
     }
 }
