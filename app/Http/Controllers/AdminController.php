@@ -10,6 +10,7 @@ class AdminController extends Controller
 {
     public function registeregresado(Request $request)
     {
+
         $input = $request->all();
         dd($input);
         $validatedData = $request->validate([
