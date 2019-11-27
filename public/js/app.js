@@ -1876,6 +1876,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37356,9 +37360,22 @@ var render = function() {
                 "div",
                 {
                   staticClass:
-                    " h-auto w-8 sm:h-auto sm:w-8 md:h-auto md:w-24 lg:h-auto lg xl:h-auto xl:w-64 relative"
+                    "inline-block h-auto w-8 sm:h-auto sm:w-8 md:h-auto md:w-24 lg:h-auto lg xl:h-auto xl:w-64 relative"
                 },
                 [_c("img", { attrs: { src: "imagenes/user.jpg" } })]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "break-words inline-block relative align-top w-8 pb-5 sm:text-lg md:text-sm lg:text-lg xl:text-xl h-auto w-56 sm:h-auto sm:w-72 md:h-auto md:w-68 lg:h-auto lg:w-68 xl:h-auto xl:w-68"
+                },
+                [
+                  _c("h3", {
+                    domProps: { textContent: _vm._s(task.description) }
+                  })
+                ]
               ),
               _vm._v(" "),
               _c(
@@ -37377,14 +37394,9 @@ var render = function() {
                     "text-xs text-right sm:text-lg md:text-xl lg:text-2xl xl:text-2xl relative mr-4"
                 },
                 [
-                  _c("button", { attrs: { id: "btn-abrir-popup" } }, [
-                    _c("i", {
-                      staticClass: "fas fa-user-edit ",
-                      domProps: { textContent: _vm._s(task.description) }
-                    })
-                  ]),
-                  _vm._v(" "),
                   _vm._m(0, true),
+                  _vm._v(" "),
+                  _vm._m(1, true),
                   _vm._v(" "),
                   _c(
                     "button",
@@ -37409,6 +37421,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { attrs: { id: "btn-abrir-popup" } }, [
+      _c("i", { staticClass: "fas fa-user-edit " })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -49730,8 +49750,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\SistemaEgresado\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\SistemaEgresado\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Jhonier\Documents\Universidad Tecnologica de Pereira\Laravel\Egresado_sistema\SistemaEgresado\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Jhonier\Documents\Universidad Tecnologica de Pereira\Laravel\Egresado_sistema\SistemaEgresado\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

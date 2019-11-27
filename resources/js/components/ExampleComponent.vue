@@ -17,14 +17,18 @@
             <div  v-for="task in arrayTasks" :key="task.id"
                 class="border-2 border-black h-auto w-56 sm:h-auto sm:w-72 md:h-auto md:w-72 lg:h-auto lg:w-72 xl:h-auto xl:w-72 relative bg-blue-200 opacity-75">
 
-                <div class=" h-auto w-8 sm:h-auto sm:w-8 md:h-auto md:w-24 lg:h-auto lg xl:h-auto xl:w-64 relative">
+                <div class="inline-block h-auto w-8 sm:h-auto sm:w-8 md:h-auto md:w-24 lg:h-auto lg xl:h-auto xl:w-64 relative">
                     <img :src="'imagenes/user.jpg'">
                 </div>
+                <div class="break-words inline-block relative align-top w-8 pb-5 sm:text-lg md:text-sm lg:text-lg xl:text-xl h-auto w-56 sm:h-auto sm:w-72 md:h-auto md:w-68 lg:h-auto lg:w-68 xl:h-auto xl:w-68">
+                    <h3 v-text="task.description"></h3>
+                </div>
+
                 <div class="absolute sm:text-lg md:text-xl lg:text-2xl xl:text-2xl">
                     <h1 v-text="task['name']"></h1>
                 </div>
                 <div class="text-xs text-right sm:text-lg md:text-xl lg:text-2xl xl:text-2xl relative mr-4">
-                    <button id="btn-abrir-popup"><i  v-text="task.description" class="fas fa-user-edit "></i></button>
+                    <button id="btn-abrir-popup"><i   class="fas fa-user-edit "></i></button>
                     <button id="btn-abrir-popup1"><i class="fas fa-user-check "></i></button>
                     <button id="btn-abrir-popupEliUser" @click="deleteTask(task)"><i class="fas fa-user-times"></i></button>
                 </div>
