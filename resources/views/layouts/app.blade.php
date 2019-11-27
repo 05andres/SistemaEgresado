@@ -27,7 +27,7 @@
         -o-background-size: cover;
         background-size: cover;">
 
-    <div id="app">
+    <ul id="app">
         <nav class="text-white block relative" style="z-index: 100;">
             <ul class="bg-black table w-full">
                 <!--primer nivel-->
@@ -91,11 +91,13 @@
                 </li>
                 @endguest
             </ul>
+            </ul>
         </nav>
 
         <main class="py-4">
             @yield('content')
         </main>
+
     </div>
 </body>
 </html>
