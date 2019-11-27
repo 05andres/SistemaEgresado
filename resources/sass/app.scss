@@ -39,7 +39,7 @@ nav li:hover > ul{
 
 .overlay {
     background: rgba(0,0,0,.3);
-    position: fixed;
+    position: relative;
     top: 0;
     bottom: 0;
     left: 0;
@@ -60,9 +60,10 @@ nav li:hover > ul{
     border-radius: 3px;
     font-family: 'Montserrat', sans-serif;
     padding: 20px;
+    margin-top: 100px;
     text-align: center;
-    width: 600px;
-    /*transition: .3s ease all;*/
+    width: 300px;
+    transition: .3s ease all;
     transform: scale(0.7);
     opacity: 0;
 }
@@ -116,7 +117,7 @@ nav li:hover > ul{
 
 .popup form .contenedor-inputs input {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     height: 52px;
     font-size: 18px;
     line-height: 52px;

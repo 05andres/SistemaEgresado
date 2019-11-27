@@ -41,8 +41,8 @@
                         <!--Segundo nivel-->
 
                                 @guest
-                                    <!--<li class="bg-black" style="width: 200px;">&nbsp<button class="hover:bg-white" href="{{ route('logout') }}"><i
-                                                class="fas fa-users-cog"></i>&nbsp LOGIN OE GONORREA</button>-->
+                                    <li class="bg-black" style="width: 200px;">&nbsp<button class="hover:bg-white" href="{{ route('logout') }}"><i
+                                                class="fas fa-users-cog"></i>&nbsp LOGIN OE GONORREA</button>
                                         <ul class="absolute" style="right: 100%; top: 0; width: 90%;">
                                 @else
                                                 <li class="bg-black" style="width: 200px;">&nbsp<button class="hover:bg-white" href="#"><i
@@ -98,16 +98,37 @@
         </main>
     </div>
 
-    <div class="overlay md:mt-0" id="overlay">
+    <div class="overlay" id="overlay">
         <div class="popup" id="popup">
             <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
-            <h3>SUSCRIBETE</h3>
-            <i class="fas fa-graduation-cap fa-8x"></i>
+            <i class="fas fa-graduation-cap fa-2x"></i>
             <h4>Modificar usario Fernanda</h4>
-            <form action="">
+            <form method="POST" action="{{route('register.egre')}}">
+                @csrf
                 <div class="contenedor-inputs">
-                    <input type="text" placeholder="Nombre">
+                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nombre">
+                            @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>        
                     <input type="email" placeholder="Correo">
+                            @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="****************">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="***************">
                 </div>
                 <input type="submit" class="btn-submit" value="Suscribirse">
             </form>
