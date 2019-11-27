@@ -10,9 +10,18 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
+        <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
         <style>
             html, body {
-                background-color: #fff;
+                background: url(imagenes/bck_egresado_3.jpg) no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+
+                background-color: #66999;
+
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -36,7 +45,7 @@
 
             .top-right {
                 position: absolute;
-                right: 10px;
+                right: 30px;
                 top: 18px;
             }
 
@@ -45,17 +54,18 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 60px;
             }
 
             .links > a {
                 color: #636b6f;
-                padding: 0 25px;
+                padding: 0 30px;
                 font-size: 13px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+                
             }
 
             .m-b-md {
@@ -63,10 +73,10 @@
             }
         </style>
     </head>
-    <body>
+    <body >
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
-                <div class="top-right links">
+                <div class="top-right links" style="border: 5px solid #fff;">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                         @if (Auth::user()->isAdmin())
@@ -83,17 +93,8 @@
                     SISTEMA EGRESADO
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
             </div>
         </div>
+      
     </body>
 </html>

@@ -38,6 +38,9 @@ route::get('register',function(){
 
 })->name('register.egre');
 
+
+Route::get('listuser','AdminController@listuser')->name('listusers.user');
+
 Route::post('regisegre','AdminController@registeregresado')->name('registregre');
 
 
