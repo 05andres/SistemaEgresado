@@ -13,7 +13,7 @@
                 <img src="imagenes/user.jpg" alt="user">
             </div>
             <div class="relative text-center sm:text-lg md:text-xl lg:text-2xl xl:text-2xl">
-                <h1></h1>
+                <h1>{{ $user->name }}</h1>
             </div>
             <div class="text-xs text-right sm:text-lg md:text-xl lg:text-2xl xl:text-2xl relative mr-4">
                 <button id="user3" onclick="myFunction(this)"><i class="fas fa-user-edit "></i></button>
