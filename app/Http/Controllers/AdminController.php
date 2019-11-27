@@ -36,4 +36,14 @@ class AdminController extends Controller
         $userlist = User::where('id_role',3)->get();
         return view('auth.listusers')->with(['users'=> $userlist]);
     }
+
+    public function deleteegresado($id)
+
+    {
+        User::destroy($id);
+        return response()->json([
+            'message' => 'Egresado Eliminado'
+        ]);
+
+    }
 }

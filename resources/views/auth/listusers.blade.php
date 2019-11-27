@@ -17,8 +17,9 @@
             </div>
             <div class="text-xs text-right sm:text-lg md:text-xl lg:text-2xl xl:text-2xl relative mr-4">
                 <button id="user3" onclick="myFunction(this)"><i class="fas fa-user-edit "></i></button>
-                <button id="user4"onclick="myFunction2(this)"><i class="fas fa-user-check "></i></button>
-                <a id="btn-abrir-popupEliUser"><i class="fas fa-user-times"></i></a>
+                <button id="user4"onclick="myFunction2(this)"><i class="fas fa-user-check "></i></button>   
+                <button  onclick="eliminaregresado({{$user->id}})" id="btn-abrir-popupEliUser"><i class="fas fa-user-times"></i></button>
+
             </div>
         </div>
         @endforeach
@@ -64,7 +65,20 @@
         </div>
     </div>
 
-    <script >function myFunction(id){
+    <script >
+        function eliminaregresado(id) {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '/listauser/' + id,
+                type: 'DELETE',
+                success: function(result) {
+                    console.log(result);
+                    window.location ="http://127.0.0.1:8000/listuser";
+                }
+            });
+        function myFunction(id){
                 console.log(id);
                 let btnAbrirPopup = id,
                 overlay = document.getElementById('overlay'),
@@ -80,7 +94,7 @@
                 overlay.classList.remove('active');
                 popup.classList.remove('active');
                 });
-                }
+                }}
     </script>
 
     <script> function myFunction2(id){
