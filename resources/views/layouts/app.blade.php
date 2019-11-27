@@ -36,13 +36,13 @@
                 <i class="fas fa-graduation-cap fa-3x"></i>
                 &nbsp
                 <span class="text-white font-bold text-3xl tracking-tighter ">Sistema Egresados</span>
-                <li class="float-right leading-foro relative mx-6 my-1 "><a href="{{ url('/') }}"><i class="fas fa-bars fa-2x"></i></a>
+                <li class="float-right leading-foro relative mx-6 my-1 "><a href="{{ url('/') }}"><i >INICIO</i></a>
                     <ul class="absolute" style="right: -50px; ">
                         <!--Segundo nivel-->
 
                                 @guest
-                                    <li class="bg-black" style="width: 200px;">&nbsp<button class="hover:bg-white" href="{{ route('logout') }}"><i
-                                                class="fas fa-users-cog"></i>&nbsp LOGIN</button>
+                                    <!--<li class="bg-black" style="width: 200px;">&nbsp<button class="hover:bg-white" href="{{ route('logout') }}"><i
+                                                class="fas fa-users-cog"></i>&nbsp LOGIN OE GONORREA</button>-->
                                         <ul class="absolute" style="right: 100%; top: 0; width: 90%;">
                                 @else
                                                 <li class="bg-black" style="width: 200px;">&nbsp<button class="hover:bg-white" href="#"><i

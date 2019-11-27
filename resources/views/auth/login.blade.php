@@ -13,6 +13,7 @@
                         <br><br>
                         <i class="fas fa-user"></i>
                         Username
+                        <br>  
                     </label>
                     <input
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('email') is-invalid @enderror"
@@ -36,7 +37,8 @@
                 <div class="flex items-center justify-between">
                     <button
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
-                        type="submit">
+                        type="submit"
+                        style="width: 150px;">
                         Sign In
                     </button>
                     @if (Route::has('password.request'))
