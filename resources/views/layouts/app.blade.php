@@ -56,13 +56,8 @@
                                     <button class="hover:bg-white" id="1" onclick="myFunction(this)">&nbsp<i class="fas fa-user-plus"></i>&nbsp
                                         Agregar
                                         egresado</button><br>
-                                    <a class="hover:bg-white">&nbsp<i class="fas fa-user-edit"></i>&nbsp
-                                        Modificar
-                                        egresado</a><br>
-                                    <a class="hover:bg-white">&nbsp<i class="fas fa-user-times"></i>&nbsp Eliminar
-                                        egresado</a><br>
                                     <a class="hover:bg-white" href="{{ route('listusers.user') }}">&nbsp<i class="fas fa-user-check"></i>&nbsp
-                                        Visualizar egresado</a>
+                                        Listar egresados</a>
                                 </li>
                                 @endif
                                 @if (Auth::user()->isAdmin())
