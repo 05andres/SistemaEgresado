@@ -19,7 +19,7 @@
             </div>
             <body>
             <div id="app" class="content">
-                <Example-component></Example-component><!--Añadimos nuestro componente vuejs-->
+                <Example-component></Example-component>
             </div>
             </body>
         </div>
