@@ -30,4 +30,9 @@ class AdminController extends Controller
         return redirect()->back()->with('success','egresado registrado con exito');
 
     }
+
+    public function listuser(){
+        $userlist = User::where('id_role',3)->get();
+        return view('auth.listusers')->with(['users'=> $userlist]);
+    }
 }

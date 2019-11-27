@@ -50,23 +50,23 @@
                                                     <ul class="absolute" style="right: 100%; top: 0; width: 90%;">
                                 <!--Tercer nivel-->
                                 @if (Auth::user()->isAdmin2())
-
+                                <!--href="{{ route('register.egre') }}"-->
                                 <li class="bg-black">
-                                    <a class="hover:bg-white" href="{{ route('register.egre') }}">&nbsp<i class="fas fa-user-plus"></i>&nbsp
+                                    <button class="hover:bg-white" id="1" onclick="myFunction(this)">&nbsp<i class="fas fa-user-plus"></i>&nbsp
                                         Agregar
-                                        egresado</a><br>
+                                        egresado</button><br>
                                     <a class="hover:bg-white">&nbsp<i class="fas fa-user-edit"></i>&nbsp
                                         Modificar
                                         egresado</a><br>
                                     <a class="hover:bg-white">&nbsp<i class="fas fa-user-times"></i>&nbsp Eliminar
                                         egresado</a><br>
-                                    <a class="hover:bg-white" href="#">&nbsp<i class="fas fa-user-check"></i>&nbsp
+                                    <a class="hover:bg-white" href="{{ route('listusers.user') }}">&nbsp<i class="fas fa-user-check"></i>&nbsp
                                         Visualizar egresado</a>
                                 </li>
                                 @endif
                                 @if (Auth::user()->isAdmin())
                                     <li class="bg-black">
-                                        <a class="hover:bg-white" href="{{ route('admin.register') }}">&nbsp<i class="fas fa-user-plus"></i>&nbsp
+                                        <a class="hover:bg-white" id="1" onclick="myFunction(this)">&nbsp<i class="fas fa-user-plus"></i>&nbsp
                                             Agregar
                                             administrador</a><br>
                                         <a class="hover:bg-white">&nbsp<i class="fas fa-user-edit"></i>&nbsp
@@ -97,5 +97,41 @@
             @yield('content')
         </main>
     </div>
+
+    <div class="overlay md:mt-0" id="overlay">
+        <div class="popup" id="popup">
+            <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+            <h3>SUSCRIBETE</h3>
+            <i class="fas fa-graduation-cap fa-8x"></i>
+            <h4>Modificar usario Fernanda</h4>
+            <form action="">
+                <div class="contenedor-inputs">
+                    <input type="text" placeholder="Nombre">
+                    <input type="email" placeholder="Correo">
+                </div>
+                <input type="submit" class="btn-submit" value="Suscribirse">
+            </form>
+        </div>
+    </div>
+
+    <script >function myFunction(id){
+                console.log(id);
+                let btnAbrirPopup = id,
+                overlay = document.getElementById('overlay'),
+                popup = document.getElementById('popup'),
+                btnCerrarPopup = document.getElementById('btn-cerrar-popup');
+                console.log(btnAbrirPopup)
+                overlay.classList.add('active');
+                popup.classList.add('active');
+
+
+                btnCerrarPopup.addEventListener('click', function(e){
+                e.preventDefault();
+                overlay.classList.remove('active');
+                popup.classList.remove('active');
+                });
+                }
+    </script>
+
 </body>
 </html>
