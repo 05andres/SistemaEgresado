@@ -99,7 +99,7 @@
         </main>
     </div>
 
-    <div class="overlay" id="overlay">
+    <div class="overlay" id="overlay" style="z-index= 200;">
         <div class="popup" id="popup">
             <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
             <i class="fas fa-graduation-cap fa-2x"></i>
@@ -112,7 +112,7 @@
                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                         <div class="col-md-6">
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus style="border: solid 1px red;">
 
                             @error('name')
                             <span class="invalid-feedback" role="alert">
@@ -126,7 +126,7 @@
                         <label for="dni" class="col-md-4 col-form-label text-md-right">{{ __('DNI') }}</label>
 
                         <div class="col-md-6">
-                            <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni" autofocus>
+                            <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni" autofocus style="border: solid 1px red;">
 
                             @error('dni')
                             <span class="invalid-feedback" role="alert">
@@ -140,7 +140,7 @@
                         <label for="edad" class="col-md-4 col-form-label text-md-right">{{ __('Edad') }}</label>
 
                         <div class="col-md-6">
-                            <input id="edad" type="number" class="form-control @error('edad') is-invalid @enderror" name="edad" value="{{ old('edad') }}"  autocomplete="edad" autofocus>
+                            <input id="edad" type="number" class="form-control @error('edad') is-invalid @enderror" name="edad" value="{{ old('edad') }}"  autocomplete="edad" autofocus style="border: solid 1px red;">
 
                             @error('edad')
                             <span class="invalid-feedback" role="alert">
@@ -154,7 +154,7 @@
                         <label for="genero" class="col-md-4 col-form-label text-md-right">{{ __('Genero') }}</label>
 
                         <div class="col-md-6">
-                            <input id="genero" type="text" class="form-control @error('genero') is-invalid @enderror" name="genero" value="{{ old('genero') }}"  autocomplete="genero" autofocus>
+                            <input id="genero" type="text" class="form-control @error('genero') is-invalid @enderror" name="genero" value="{{ old('genero') }}"  autocomplete="genero" autofocus style="border: solid 1px red;">
 
                             @error('genero')
                             <span class="invalid-feedback" role="alert">
@@ -168,7 +168,7 @@
                         <label for="pais" class="col-md-4 col-form-label text-md-right">{{ __('Pais') }}</label>
 
                         <div class="col-md-6">
-                            <input id="pais" type="text" class="form-control @error('pais') is-invalid @enderror" name="pais" value="{{ old('pais') }}"  autocomplete="pais" autofocus>
+                            <input id="pais" type="text" class="form-control @error('pais') is-invalid @enderror" name="pais" value="{{ old('pais') }}"  autocomplete="pais" autofocus style="border: solid 1px red;">
 
                             @error('pais')
                             <span class="invalid-feedback" role="alert">
@@ -182,7 +182,7 @@
                         <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                         <div class="col-md-6">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" style="border: solid 1px red;">
 
                             @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -196,7 +196,7 @@
                         <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                         <div class="col-md-6">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" style="border: solid 1px red;">
 
                             @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -210,13 +210,14 @@
                         <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                         <div class="col-md-6">
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" style="border: solid 1px red;" >
                         </div>
                     </div>
 
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
+                        <br>
+                            <button type="submit" class="btn btn-primary btn-submit">
                                 {{ __('Register') }}
                             </button>
                         </div>

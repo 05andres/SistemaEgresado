@@ -18,7 +18,7 @@
             <div class="text-xs text-right sm:text-lg md:text-xl lg:text-2xl xl:text-2xl relative mr-4">
                 <button id="user3" onclick="myFunction(this)"><i class="fas fa-user-edit "></i></button>
                 <button id="user4"onclick="myFunction2(this)"><i class="fas fa-user-check "></i></button>
-                <button id="btn-abrir-popupEliUser"><i class="fas fa-user-times"></i></button>
+                <a id="btn-abrir-popupEliUser"><i class="fas fa-user-times"></i></a>
             </div>
         </div>
         @endforeach
